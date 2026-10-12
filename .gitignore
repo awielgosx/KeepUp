@@ -1,0 +1,6 @@
+.DS_Store
+mac/.build/
+mac/*.app
+mac/*.dmg
+mac/AppResources/AppIcon.icns
+mac/.dmg_staging/

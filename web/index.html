@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>KeepUp</title>
+  <meta name="theme-color" content="#0b0f24" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#eceff4" media="(prefers-color-scheme: light)">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <main class="panel">
+    <header class="top">
+      <h1>KeepUp</h1>
+      <span id="sync-dot" class="sync-dot" title="Not syncing"></span>
+      <div class="spacer"></div>
+      <button id="btn-add" class="icon-btn" title="New item" aria-label="New item">+</button>
+      <button id="btn-theme" class="icon-btn" title="Theme" aria-label="Theme">◐</button>
+      <button id="btn-settings" class="icon-btn" title="Settings" aria-label="Settings">⚙</button>
+    </header>
+
+    <section id="list" class="list"></section>
+
+    <section id="preview" class="preview" hidden></section>
+
+    <form id="composer" class="composer">
+      <textarea id="composer-input" rows="1"
+        placeholder="Throw it in… e.g. “strategy essay due fri 23:59” — or paste a syllabus"></textarea>
+      <button id="composer-send" type="submit" class="send" aria-label="Add">↑</button>
+    </form>
+  </main>
+
+  <dialog id="detail" class="sheet">
+    <form method="dialog" id="detail-form">
+      <input id="d-title" class="d-title" placeholder="What" autocomplete="off" required>
+      <div class="d-row">
+        <label>Due<input id="d-date" type="date"></label>
+        <label>Time<input id="d-time" type="time"></label>
+      </div>
+      <label>Place<input id="d-place" autocomplete="off"></label>
+      <label>Course / tag<input id="d-course" list="courses" autocomplete="off"></label>
+      <datalist id="courses"></datalist>
+      <label>Type
+        <select id="d-kind">
+          <option value="todo">To-do</option>
+          <option value="assignment">Assignment</option>
+          <option value="exam">Exam</option>
+          <option value="event">Event</option>
+        </select>
+      </label>
+      <label>Notes<textarea id="d-notes" rows="3"></textarea></label>
+      <div class="d-actions">
+        <button type="button" id="d-delete" class="ghost danger">Delete</button>
+        <div class="spacer"></div>
+        <button type="button" id="d-cancel" class="ghost">Cancel</button>
+        <button type="submit" id="d-save" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="settings" class="sheet">
+    <form method="dialog" id="settings-form">
+      <h2>Settings</h2>
+      <p class="hint">Stored only on this device. Setup steps are in the README.</p>
+      <label>Claude API key<input id="s-claude" type="password" autocomplete="off" placeholder="sk-ant-…"></label>
+      <label>Supabase URL<input id="s-url" autocomplete="off" placeholder="https://xxxx.supabase.co"></label>
+      <label>Supabase anon key<input id="s-anon" type="password" autocomplete="off"></label>
+      <label>Sync key<input id="s-sync" type="password" autocomplete="off" placeholder="the passphrase from schema.sql"></label>
+      <label>Theme
+        <select id="s-theme">
+          <option value="auto">Follow system</option>
+          <option value="dark">Cosmic Glass</option>
+          <option value="light">Liquid Silver</option>
+        </select>
+      </label>
+      <div class="d-actions">
+        <span id="s-status" class="hint"></span>
+        <div class="spacer"></div>
+        <button type="button" id="s-cancel" class="ghost">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
